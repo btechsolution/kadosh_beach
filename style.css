@@ -24,34 +24,35 @@
 }
 
 /* ===== BACKGROUND GLOBAL ===== */
-html {
-  /* A cor de fundo do html preenche a barra do Safari no iOS */
-  background-color: #a8dce8;
-  height: 100%;
-}
 
-body {
-  font-family: "Inter", sans-serif;
-  position: relative;
-  /* Mínimo de altura usando tanto vh quanto dvh para compatibilidade */
-  min-height: 100vh;
-  /* background na própria body, sem fixed — funciona melhor no iOS */
+/* html e body recebem a imagem — garante cobertura total no iOS */
+html {
+  height: 100%;
   background-image: var(--bg-url);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
-  /* NÃO usar background-attachment: fixed no iOS */
 }
 
-/* overlay sutil */
+body {
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  /* herda o background do html, body fica transparente */
+  background: transparent;
+
+  /* padding para respeitar a safe area do iPhone (notch/câmera) */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* overlay sutil para legibilidade */
 body::before {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  /* estende para cima da safe area */
+  top: calc(-1 * env(safe-area-inset-top));
   background: rgba(5, 30, 50, 0.22);
   z-index: 0;
   pointer-events: none;
@@ -197,7 +198,7 @@ footer {
 
 /* ===== DESKTOP ===== */
 @media (min-width: 768px) {
-  body {
+  html {
     background-image: url(./assets/bg-desktop.jpg);
     background-position: center center;
   }
