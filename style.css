@@ -9,14 +9,12 @@
   --text-color: #0d2b35;
   --bg-url: url(./assets/bg-mobile.jpg);
 
-  /* Ajustados para combinar com a praia azul/turquesa */
   --stroke-color: rgba(255, 255, 255, 0.3);
   --surface-color: rgba(255, 255, 255, 0.18);
   --surface-color-hover: rgba(255, 255, 255, 0.35);
   --highlight-color: #1a7a6e;
   --switch-bg-url: url(./assets/moon-stars.svg);
 
-  /* Paleta ajustada para a foto */
   --ocean-blue: #1a9bb5;
   --turquoise: #2ab8a0;
   --sand: #f0d98a;
@@ -26,29 +24,38 @@
 }
 
 /* ===== BACKGROUND GLOBAL ===== */
-html {
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   min-height: 100%;
-  background-image: var(--bg-url);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: #a8dce8;
+}
+
+html {
+  /* força o html a ocupar pelo menos a altura da viewport */
+  height: 100%;
 }
 
 body {
   min-height: 100vh;
   font-family: "Inter", sans-serif;
-  background: transparent;
   position: relative;
+
+  /* Background fica no body para acompanhar o conteúdo corretamente */
+  background-image: var(--bg-url);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-/* overlay azulado sutil — respeita os tons da foto */
+/* overlay sutil para legibilidade */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(5, 30, 50, 0.28);
+  background: rgba(5, 30, 50, 0.22);
   z-index: 0;
   pointer-events: none;
 }
@@ -60,7 +67,7 @@ body::before {
   width: 100%;
   max-width: 360px;
   margin: 56px auto 0;
-  padding: 0 16px;
+  padding: 0 16px 32px;
 }
 
 /* ===== PROFILE ===== */
@@ -191,13 +198,14 @@ footer {
 
 /* ===== DESKTOP ===== */
 @media (min-width: 768px) {
-  :root {
+  body {
     --bg-url: url(./assets/bg-desktop.jpg);
+    background-image: url(./assets/bg-desktop.jpg);
   }
 
   #container {
     max-width: 588px;
-    padding: 0 24px;
+    padding: 0 24px 48px;
   }
 
   #profile img {
