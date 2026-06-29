@@ -24,38 +24,29 @@
 }
 
 /* ===== BACKGROUND GLOBAL ===== */
-
-/* html e body recebem a imagem — garante cobertura total no iOS */
-html {
+html,
+body {
+  margin: 0;
+  padding: 0;
   height: 100%;
-  background-image: var(--bg-url);
+}
+
+html {
+  /* overlay integrado na imagem — cobre safe area do iPhone e Chrome */
+  background-image:
+    linear-gradient(rgba(5, 30, 50, 0.22), rgba(5, 30, 50, 0.22)),
+    var(--bg-url);
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  background-attachment: scroll;
 }
 
 body {
   min-height: 100vh;
   font-family: "Inter", sans-serif;
   position: relative;
-  /* herda o background do html, body fica transparente */
   background: transparent;
-
-  /* padding para respeitar a safe area do iPhone (notch/câmera) */
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* overlay sutil para legibilidade */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  /* estende para cima da safe area */
-  top: calc(-1 * env(safe-area-inset-top));
-  background: rgba(5, 30, 50, 0.22);
-  z-index: 0;
-  pointer-events: none;
 }
 
 /* ===== CONTAINER ===== */
@@ -65,7 +56,9 @@ body::before {
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
-  padding: 48px 16px 48px;
+  /* safe area para notch do iPhone */
+  padding: calc(env(safe-area-inset-top) + 32px) 16px
+           calc(env(safe-area-inset-bottom) + 32px);
 }
 
 /* ===== PROFILE ===== */
@@ -199,8 +192,12 @@ footer {
 /* ===== DESKTOP ===== */
 @media (min-width: 768px) {
   html {
-    background-image: url(./assets/bg-desktop.jpg);
+    background-image:
+      linear-gradient(rgba(5, 30, 50, 0.22), rgba(5, 30, 50, 0.22)),
+      url(./assets/bg-desktop.jpg);
     background-position: center center;
+    /* fixed funciona bem no Chrome desktop */
+    background-attachment: fixed;
   }
 
   #container {
