@@ -24,39 +24,45 @@
 }
 
 /* ===== BACKGROUND GLOBAL ===== */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-}
-
 html {
-  /* força o html a ocupar pelo menos a altura da viewport */
   height: 100%;
+  /* fallback de cor enquanto imagem carrega */
+  background-color: #a8dce8;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   font-family: "Inter", sans-serif;
   position: relative;
-
-  /* Background fica no body para acompanhar o conteúdo corretamente */
-  background-image: var(--bg-url);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
-  background-attachment: fixed;
+  background: transparent;
 }
 
-/* overlay sutil para legibilidade */
-body::before {
+/* Camada da imagem — fixed, cobre tudo, funciona no iOS */
+html::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: var(--bg-url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  z-index: -2;
+}
+
+/* Camada do overlay escuro */
+html::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(5, 30, 50, 0.22);
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -66,8 +72,8 @@ body::before {
   z-index: 1;
   width: 100%;
   max-width: 360px;
-  margin: 56px auto 0;
-  padding: 0 16px 32px;
+  margin: 0 auto;
+  padding: 48px 16px 48px;
 }
 
 /* ===== PROFILE ===== */
@@ -128,6 +134,7 @@ body::before {
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: 999px;
 }
 
@@ -149,6 +156,7 @@ ul li a {
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -198,14 +206,13 @@ footer {
 
 /* ===== DESKTOP ===== */
 @media (min-width: 768px) {
-  body {
-    --bg-url: url(./assets/bg-desktop.jpg);
+  html::before {
     background-image: url(./assets/bg-desktop.jpg);
   }
 
   #container {
     max-width: 588px;
-    padding: 0 24px 48px;
+    padding: 56px 24px 48px;
   }
 
   #profile img {
