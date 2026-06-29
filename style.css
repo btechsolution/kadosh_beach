@@ -1,0 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--cream);
+}
+
+:root {
+  --text-color: #0d2b35;
+  --bg-url: url(./assets/bg-mobile.jpg);
+
+  /* Ajustados para combinar com a praia azul/turquesa */
+  --stroke-color: rgba(255, 255, 255, 0.3);
+  --surface-color: rgba(255, 255, 255, 0.18);
+  --surface-color-hover: rgba(255, 255, 255, 0.35);
+  --highlight-color: #1a7a6e;
+  --switch-bg-url: url(./assets/moon-stars.svg);
+
+  /* Paleta ajustada para a foto */
+  --ocean-blue: #1a9bb5;
+  --turquoise: #2ab8a0;
+  --sand: #f0d98a;
+  --deep-sea: #0d5e6e;
+  --white-foam: rgba(255, 255, 255, 0.9);
+  --cream: #f5f0e8;
+}
+
+/* ===== BACKGROUND GLOBAL ===== */
+html {
+  min-height: 100%;
+  background-image: var(--bg-url);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #a8dce8;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  background: transparent;
+  position: relative;
+}
+
+/* overlay azulado sutil — respeita os tons da foto */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 30, 50, 0.28);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== CONTAINER ===== */
+#container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  margin: 56px auto 0;
+  padding: 0 16px;
+}
+
+/* ===== PROFILE ===== */
+#profile {
+  text-align: center;
+  padding: 16px;
+}
+
+#profile img {
+  width: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--cream);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== SWITCH ===== */
+#switch {
+  position: relative;
+  width: 56px;
+  margin: 4px auto;
+}
+
+#switch button {
+  width: 28px;
+  height: 28px;
+  background: var(--cream) var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+  animation: slide-back 0.2s;
+}
+
+.light #switch button {
+  animation: slide-in 0.2s forwards;
+}
+
+#switch button:hover {
+  outline: 6px solid var(--turquoise);
+}
+
+#switch span {
+  display: block;
+  width: 56px;
+  height: 20px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+}
+
+/* ===== LINKS ===== */
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cream);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, border 0.2s, color 0.2s;
+}
+
+ul li a:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: var(--deep-sea);
+  text-shadow: none;
+}
+
+/* ===== SOCIAL LINKS ===== */
+#social-links {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  font-size: 20px;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  color: var(--cream);
+}
+
+#social-links a:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--deep-sea);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  :root {
+    --bg-url: url(./assets/bg-desktop.jpg);
+  }
+
+  #container {
+    max-width: 588px;
+    padding: 0 24px;
+  }
+
+  #profile img {
+    width: 112px;
+  }
+
+  #profile p {
+    font-size: 16px;
+  }
+
+  #switch {
+    width: 64px;
+  }
+
+  #switch button {
+    width: 32px;
+    height: 32px;
+  }
+
+  #switch span {
+    width: 64px;
+    height: 24px;
+  }
+
+  ul {
+    gap: 16px;
+    padding: 24px 0;
+  }
+
+  ul li a {
+    padding: 16px 24px;
+    font-size: 16px;
+  }
+
+  #social-links {
+    padding: 24px 0;
+    font-size: 24px;
+  }
+
+  footer {
+    padding: 24px 0;
+    font-size: 14px;
+  }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes slide-in {
+  from { left: 0; }
+  to { left: 50%; }
+}
+
+@keyframes slide-back {
+  from { left: 50%; }
+  to { left: 0; }
+}
